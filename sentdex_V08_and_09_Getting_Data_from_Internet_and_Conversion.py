@@ -55,3 +55,5 @@ def graph_data(stock):
     plt.title('Interesting Graph\nCheck it out!!')
     plt.legend()
     plt.show()
+    
+graph_data('prueba')"

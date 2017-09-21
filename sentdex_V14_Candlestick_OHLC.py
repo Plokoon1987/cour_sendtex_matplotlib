@@ -1,6 +1,10 @@
-#python -c "from sentdex_V12_Customization_of_Colors_and_Fills import bytespdate2num, graph_data; graph_data('prueba')"
+#python -c "from sentdex_V14_Candlestick_OHLC import bytespdate2num, graph_data; graph_data('prueba')"
 
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import matplotlib.ticker as mticker
+from matplotlib.finance import candlestick_ohlc # finance.py will be removed, mpl_finance will have to be installed
+
 import numpy as np
 import urllib
 import matplotlib.dates as mdates
@@ -40,26 +44,28 @@ def graph_data(stock):
         delimiter=',',
         unpack=True,
         converters={0 : bytespdate2num('%Y-%m-%d')})
-  
     
-    #***** AX1 *****
     
-    ax1.plot_date(date, closep, '-', label='Close Price') # Use '-' to make plot_date as plot, as
-                                                          # it seems to use scatter by default
-    ax1.plot([], [], linewidth=5, label='loss', color='r', alpha=0.5)
-    ax1.plot([], [], linewidth=5, label='gain', color='g', alpha=0.5)
+    # ***** CANDLESTICK *****    
+    x = 0
+    y = 10  # or len(date)
+    ohlc = []
     
-    ax1.fill_between(date, closep, closep[-1], where=(closep>closep[-1]), facecolor='g', alpha = 0.5)  
-    # Plots 2 graphs in 1!! plot_date and fill. change colour or use alpha to see both plots
-    # same colour is used by default otherwise
-    ax1.fill_between(date, closep, closep[-1], where=(closep<closep[-1]), facecolor='r', alpha = 0.5)
+    while x < y:
+        append_me = date[x], openp[x], highp[x], lowp[x], closep[x], adj_closep[x], volume[x]
+        ohlc.append(append_me)
+        x +=1
     
+    candlestick_ohlc(ax1, ohlc, width=0.4, colorup='#77d879', colordown='#db3f3f')
+    
+    # **** LABELS ****
     for label in ax1.xaxis.get_ticklabels():
         label.set_rotation(45)
-    ax1.grid(True, color='g', linestyle='-', linewidth=1)
-    ax1.xaxis.label.set_color('c')
-    ax1.yaxis.label.set_color('r')
-    ax1.set_yticks([0,25,50,75,150,300,450,600])
+    
+    ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+    ax1.xaxis.set_major_locator(mticker.MaxNLocator(10))
+    ax1.grid(True)
+    
     
     #***** PLT *****
 
@@ -69,5 +75,5 @@ def graph_data(stock):
     plt.legend()
     plt.subplots_adjust(left=0.09, bottom=0.20, right=0.94, top=0.90, wspace=0.2, hspace=0)
     plt.show()
-
-graph_data('prueba')
+    
+graph_data('Prueba')

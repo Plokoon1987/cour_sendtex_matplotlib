@@ -53,6 +53,7 @@ def graph_data(stock):
     plt.subplots_adjust(left=0.09, bottom=0.20, right=0.94, top=0.90, wspace=0.2, hspace=0)
     plt.show()
     
+graph_data('prueba')
     
 ''' 
     # To Practice Unix Time
