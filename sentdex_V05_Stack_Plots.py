@@ -9,6 +9,11 @@ playing = [8,5,7,8,13]
 
 plt.stackplot(days, sleeping,eating,working, playing, colors=['m','c','r','k'])
 
+plt.plot([], [], color='m', label='Sleeping', linewidth=5)
+plt.plot([], [], color='c', label='Eating', linewidth=5)
+plt.plot([], [], color='r', label='Working', linewidth=5)
+plt.plot([], [], color='k', label='Playing', linewidth=5)
+
 plt.xlabel('x')
 plt.xlabel('y')
 
