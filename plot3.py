@@ -1,9 +1,10 @@
 import matplotlib.pyplot as plt
+from matplotlib.ticker import FormatStrFormatter
 
 min_depth = 0
 max_depth = 10
 
-f, ax = plt.subplots(2, 6)
+f, ax = plt.subplots(2, 6, sharey='row')
 
 title = [
     'Profundidad (m)',
@@ -17,15 +18,23 @@ for subp, titl in zip(ax[0], title):
     subp.tick_params(labelbottom='off',labelleft='off', left='off')
     subp.text(0.5, 0.05, titl, color='k', ha='center', va='bottom', size='x-small', rotation=90)
 
-ax[1,0].minorticks_on()
-ax[1,0].tick_params(axis='x', labelbottom='off', direction='in')
-ax[1,0].tick_params(axis='x', which='minor', bottom='off')
+# ***** Profundidad *****
+# .tick_params['size', 'width', 'color', 'tickdir', 'pad', 'labelsize', 'labelcolor', 'zorder', 'gridOn', 'tick1On', 'tick2On', 'label1On', 'label2On', 'length', 'direction', 'left', 'bottom', 'right', 'top', 'labelleft', 'labelbottom', 'labelright', 'labeltop']
+
+
 ax[1,0].set_ylim(ymin=max_depth, ymax=min_depth)
+ax[1,0].minorticks_on()
+ax[1,0].tick_params(axis='x', labelbottom='off', bottom='off')
+ax[1,0].tick_params(axis='x', which='minor', bottom='off')
+ax[1,0].tick_params(axis='y', direction='in', pad=-15, gridOn=True)
+ax[1,0].tick_params(axis='y', which='minor', direction='in')
+ax[1,0].yaxis.set_major_formatter(FormatStrFormatter('%.1f'))
 
 
 for subp in ax[1,1:]:
     subp.tick_params(labelbottom='off',labelleft='off', left='off', direction='in')
     subp.set_ylim(ymin=max_depth, ymax=min_depth)
+    subp.tick_params(axis='y', which='minor', left='off')
 
     
 #for subp in ax[1]:
