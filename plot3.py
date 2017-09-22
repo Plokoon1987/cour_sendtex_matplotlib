@@ -17,7 +17,9 @@ for subp, titl in zip(ax[0], title):
     subp.tick_params(labelbottom='off',labelleft='off', left='off')
     subp.text(0.5, 0.05, titl, color='k', ha='center', va='bottom', size='x-small', rotation=90)
 
-ax[1,0].tick_params(labelbottom='off', direction='in')
+ax[1,0].minorticks_on()
+ax[1,0].tick_params(axis='x', labelbottom='off', direction='in')
+ax[1,0].tick_params(axis='x', which='minor', bottom='off')
 ax[1,0].set_ylim(ymin=max_depth, ymax=min_depth)
 
 
