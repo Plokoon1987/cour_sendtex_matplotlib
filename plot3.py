@@ -1,8 +1,9 @@
 import matplotlib.pyplot as plt
-#import matplotlib.ticker as mticker
 
-f, ax = plt.subplots(2, 6, sharey='row')
+min_depth = 0
+max_depth = 10
 
+f, ax = plt.subplots(2, 6)
 
 title = [
     'Profundidad (m)',
@@ -12,20 +13,24 @@ title = [
     'Prof.Agua (m)',
     'Notas']
 
-ax[1,0].minorticks_on()
-
-
-
-
 for subp, titl in zip(ax[0], title):
     subp.tick_params(labelbottom='off',labelleft='off', left='off')
     subp.text(0.5, 0.05, titl, color='k', ha='center', va='bottom', size='x-small', rotation=90)
-    
 
-for subp, titl in zip(ax[1], title):
-    subp.tick_params(labelbottom='off',labelleft='off', direction='in')
-    #subp.tick_params(labelbottom='off', direction='in', pad=-15)
-    subp.text(0.5, 0.8, titl, color='k', ha='center', rotation=90)
+ax[1,0].tick_params(labelbottom='off', direction='in')
+ax[1,0].set_ylim(ymin=max_depth, ymax=min_depth)
+
+
+for subp in ax[1,1:]:
+    subp.tick_params(labelbottom='off',labelleft='off', left='off', direction='in')
+    subp.set_ylim(ymin=max_depth, ymax=min_depth)
+
+    
+#for subp in ax[1]:
+#    counter = 0
+#    if counter > 0:
+#        subp.tick_params(labelbottom='off',labelleft='off', direction='in')
+#    counter =+ 1
 
 #ax[1,1].minorticks_on()
     
@@ -45,7 +50,7 @@ for subp, titl in zip(ax[1], title):
 #    label.set_size('x-small')
 
 
-plt.ylim(ymin=10.0, ymax=0.0)
+#plt.ylim(ymin=10.0, ymax=0.0)
 
 
 ax[1,1].axhline(y=1)
