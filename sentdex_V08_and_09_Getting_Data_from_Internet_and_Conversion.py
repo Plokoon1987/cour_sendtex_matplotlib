@@ -56,4 +56,4 @@ def graph_data(stock):
     plt.legend()
     plt.show()
     
-graph_data('prueba')"
+graph_data('prueba')
