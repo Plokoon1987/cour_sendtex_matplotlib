@@ -165,9 +165,6 @@ labels = ['0', '20', '40', '60', '80', '100']
 
 bl_titl = fig.add_subplot(cuerpo_grid[num_grid])
 bl_titl.set_xticks([0, 20, 40, 60, 80, 100])
-
-
-
 bl_titl.tick_params(labelleft='off', left='off', direction='in', tickdir='in')
 set_axis_appearance(bl_titl)
 bl_titl.text(38, 0.2, titulo1, color='#99CC00', ha='center', va='bottom', size='x-small', rotation=90)
