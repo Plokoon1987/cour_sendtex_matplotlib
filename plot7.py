@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from matplotlib.backends.backend_pdf import PdfPages
-from matplotlib.ticker import ticker
+from matplotlib.lines import Line2D
 
 
 
@@ -228,52 +228,38 @@ num_grid = 5
 titulo = r'$\mathregular{N^o de juntas/m}$'
 min_x = 33
 max_x = 0
-num_ticks = 2
-ticks = []
-minor_ticks = []
-for x in range(num_ticks):
-    if x == 3 or x == 7:    
-        ticks.append(int(min_x + x*((max_x - min_x) / (num_ticks - 1) )))
-    else:
-        minor_ticks.append(int(min_x + x*((max_x - min_x) / (num_ticks - 1) )))
+ticks = [6,18,30]
 
 # Titulos
 
 bl_titl = fig.add_subplot(cuerpo_grid[num_grid])
 bl_titl.set_xlim(xmin=min_x, xmax=max_x)
-bl_titl.minorticks_on()
-bl_titl.set_major_locator(MultipleLocator(3))
+bl_titl.set_ylim(ymin=0, ymax=1)
+bl_titl.set_xticks(ticks)
+bl_titl.tick_params(labelleft='off', left='off', direction='in', tickdir='in', length=2.5, width=0.4)
 
-'''
-
-#bl_titl.set_xticks(ticks)
-bl_titl.text(3.5, 0.2, titulo, color='k', ha='center', va='bottom', size='x-small', rotation=90)
-
-bl_titl.tick_params(labelleft='off', left='off', direction='in', tickdir='in', length=5, width=0.4)
-
-bl_titl.tick_params(which='minor', labelleft='off', left='off', labelbottom='on', direction='in', tickdir='in', length=5, width=0.4, color='r')
-
-bl_titl.set_xticklabels(minor_ticks, size='4.5', va='bottom', position=(0,0.16)) # Modificar manualmente los labels
-
-'''
-
-'''
-for lines, labels in zip(ticklines, ticklabels):
-    lines
-#bl_titl.tick_params(labelleft='off', left='off', direction='in', tickdir='in', length=2.5, width=0.4)
-
-bl_titl.set_xticklabels(['', '>30', '', '24', '', '18', '', '12', '', '6', '', ''], size='4', va='bottom', position=(0,0.08)) # Modificar manualmente los labels
+bl_titl.set_xticklabels([6,18,'>30'], size='3', va='bottom', position=(0,0.08)) # Modificar manualmente los labels
+bl_titl.text(24, 0.08, '24', color='k', ha='center', va='bottom', size=3.5)
+bl_titl.text(12, 0.08, '12', color='k', ha='center', va='bottom', size=3.5)
+bl_titl.axvline(x=12, ymin=0, ymax=0.05, linewidth=0.4, color='k')
+bl_titl.axvline(x=24, ymin=0, ymax=0.05, linewidth=0.4, color='k')
+label = bl_titl.xaxis.get_ticklabels()
+label[-1].set_rotation(0)
+label[-1].set_x(10)
 set_axis_appearance(bl_titl)
 
-'''
+
+bl_titl.text(16.5, 0.2, titulo, color='k', ha='center', va='bottom', size='x-small', rotation=90)
+
+
 # Plot
-'''
+
 bl_plot = fig.add_subplot(cuerpo_grid[num_grid + num_col])
 bl_plot.set_xlim(xmin=min_x, xmax=max_x)
 bl_plot.tick_params(labelbottom='off', bottom='off', labelleft='off', left='off')
 set_axis_appearance(bl_plot)
 
-'''
+
 ###########
 # BLOCK 7 #
 ###########
